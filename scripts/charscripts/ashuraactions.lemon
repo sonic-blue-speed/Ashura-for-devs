@@ -1,0 +1,149 @@
+//ashura doesn't dropdash.
+function void Character.updateJumpMoves()
+{
+	if (char.character != CHARACTER_SONIC || ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168)))
+	{
+		base.Character.updateJumpMoves()
+		return
+	}
+	u8 input_state     = (char.character == CHARACTER_TAILS) ? control.tails.state   : control.player1.state
+	u8 input_pressed   = (char.character == CHARACTER_TAILS) ? control.tails.pressed : control.player1.pressed
+	bool isSuperActive = (char.character == CHARACTER_TAILS) ? super.active.tails    : super.active
+
+	if (char.jumping)
+	{
+		// Limit velocity.y
+		s16 max_vy = (char.flags & char.flag.UNDERWATER) ? -0x200 : -0x400
+		if (char.velocity.y < max_vy)
+		{
+			// Limit vertical velocity while not pressing any jump button
+			//  -> This is important to support low jumps by just tapping the button briefly
+			if ((input_state & CONTROL_ABC) == 0)
+			{
+				char.velocity.y = max_vy
+			}
+		}
+		else
+		{
+			if (char.double_jump_state == 0)
+			{
+				#if STANDALONE
+					if (buttonPressed(BUTTON_Y))
+					{
+						if (!isSuperActive && char.invuln.countdown == 0)	// Check invulnerability to prevent spamming of super activate + cancel
+						{
+							if (Character.performSuperTransformation())
+								return
+						}
+					}
+				#endif
+
+				// Check if pressed jump again in mid-air
+				if (input_pressed & CONTROL_ABC)
+				{
+				#if STANDALONE
+					// Check for other things to do instead of the usual reaction to jump button pressed
+					if (onCharacterPressedJumpInMidAir(input_state, input_pressed))
+				#endif
+					{
+						if (char.character == CHARACTER_SONIC)
+						{
+							SonicPressedJumpInMidAir()
+						}
+						else if (char.character == CHARACTER_TAILS)
+						{
+							TailsPressedJumpInMidAir()
+						}
+						else if (!competition_mode.active)
+						{
+							KnucklesPressedJumpInMidAir()
+						}
+						else
+						{
+							// Knuckles behaves just like Sonic in competition mode
+							SonicPressedJumpInMidAir()
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		if (char.spindash == 0)
+		{
+			char.velocity.y = max(char.velocity.y, -0x0fc0)
+		}
+	}
+}
+
+//# address-hook(0x069526) end(0x069586)
+function void fn069526()
+{
+	// Part of cutscene: Running onto the bridge over Hydrocity
+	//I forgot that this should only affect mighty
+	if (global.zone_act != 0x0001 || global.xtrachar != 168)
+    {
+        base.fn069526()
+        return
+    }
+
+	tails.catch_timeout = 5
+	A1 = 0xffffb000
+	D0.u16 = u16[0xfffffa84] + 0x01f8
+	if (D0.u16 > objA1.position.x.u16)
+	{
+		// Move right
+		control.player1 = 0x0808
+		return
+	}
+
+	StopObjectA1()
+	
+	// UPPER PATH -- CUTSCENE
+	if (camera.position.y.u16 < 0x200)//(!isMainCharacter(CHARACTER_KNUCKLES))
+	{
+		objA0.update_address = 0x069588
+		if (allocDynamicObjectStd())
+		{
+			objA1.update_address = 0x061d4c
+			objA1.subtype2c = 0x04
+		}
+		addPatternLoadingCue(0x083d6c)
+	}
+	else
+	{
+		objA0.update_address = 0x0695ce
+		control.player1 = 0x2020	
+	}
+}
+
+//Have Mighty keep the jump animation if he leaps down
+//# address-hook(0x0695ce) end(0x069610)
+function void fn0695ce()
+{
+	if (global.xtrachar != 168)
+	{
+		base.fn0695ce()
+		return
+	}
+
+	control.player1 = 0x2000
+
+	A1 = 0xffffb000
+	u8[A1 + 0x0a] |= 0x80
+	if (objA1.velocity.y < 0)
+		return
+	
+	objA0.update_address = 0x069616
+	// u8[A1 + 0x22] = 0xcb
+	u8[A1 + 0x2e] = 0x83
+	UpdatePlayer1SpritePatterns()
+	
+	D0.u16 = 0x1000
+	screenmover_target.bottom = D0.u16
+	move_area.bottom.target = D0.u16
+
+	// "spawnSimpleChildObjects(0x084b12)" replaced by:
+	spawnSimpleChildObjects(0x084ad2, 1)		// Screen mover for the lower border
+}

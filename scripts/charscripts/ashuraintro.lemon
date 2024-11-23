@@ -1,0 +1,219 @@
+function bool isSonicIntro()
+{
+	if (global.xtrachar == 168)
+	{
+		return false
+	}
+	
+	return base.isSonicIntro()
+}
+
+//# address-hook(0x01be46) end(0x01bfae)
+function void SetupCharacterAtStartPosition()
+{
+	if (global.zone_act != 0x0000 || global.xtrachar != 168 || checkpoint.number != 0)
+	{
+		base.SetupCharacterAtStartPosition()
+		return
+	}
+	
+	A1 = isMainCharacter(CHARACTER_KNUCKLES) ? 0x1e3cd8 : 0x1e3c18		// Get starting positions from respective tables
+	A1 += global.zone * 8 + global.act * 4
+	D1 = u16[A1]		// Get x-position
+	D0 = u16[A1+2]		// Get y-position
+	u16[0xffffb000 + 0x10] = D1.u16		// Set Player 1 x-position
+	u16[0xffffb000 + 0x14] = D0.u16		// Set Player 1 y-position
+
+	if (global.zone_act == 0x0000)
+	{
+		u16[0xffffb010] += 0x2f
+		
+		timer.alldata = 0
+		camera.position.x.u16 = 0x1308
+		camera.position.y.u16 = 0x0390
+		
+		player1.control_override = 0xff
+		player2.control_override = 0xff
+		control.player1 = 0
+		control.tails = 0
+		
+		circleBlastAshura = 0x00010
+		circleBlastTrans = 255
+		
+		if (allocDynamicObjectStd())
+		{
+			objA1.update_address = 0x21a50e
+			Game.startSkippableCutscene()
+		}
+	}
+}
+
+global s32 circleBlastAshura = 0x00010
+global u8 circleBlastTrans = 255
+//# address-hook(0x21a50e)
+function void AshuraIntro_Intro()
+{
+	global.level_started = 0
+	timer.alldata = 0
+	
+	A1 = 0xffffb000
+	objA1.render_flags &= ~render_flag.WORLD
+	player1.control_override = 0xff
+	player2.control_override = 0xff
+	control.player1 = 0
+	control.tails = 0
+	
+	++objA0.countdown_value
+	if (objA0.countdown_value >= 0x70)
+	{
+		if (objA0.value26 == 0)
+		{
+			playSound(0x4e)
+			playSound(0xB8)
+			objA0.value26 = 1
+		}
+		
+		circleBlastAshura += 0x00f00
+		if (circleBlastAshura >= 0x20000)
+		{
+			if (objA0.value42 == 0)
+			{
+				if (allocDynamicObjectStd())
+				{
+					objA1.animation.sprite = 0x00
+					objA1.update_address = 0x21a50c
+					objA1.render_flags |= render_flag.WORLD
+					objA1.animation.sprite = 0
+					objA1.animation.timer = 0
+					objA1.value26 = 0
+				}
+				objA0.value42 = 1
+			}
+			circleBlastTrans -= 17
+			Renderer.drawCustomSprite("flash", 0, 0, 0, SPRITE_FLAG_PRIO, 0xe000, 0, circleBlastTrans)
+		}
+		else
+			Renderer.drawCustomSprite("168atonblast", getScreenWidth() / 2, getScreenHeight() / 2, 0, SPRITE_FLAG_PRIO, 0xe000, 0, 0xffffffff, circleBlastAshura)
+		
+		if (circleBlastTrans <= 0)
+		{
+			UnloadObject()
+			return
+		}
+	}
+	else
+	{
+		camera.hyper_knux_shake = (objA0.countdown_value / 3)
+		if (((level.framecounter - 1) & 0x0f) == 0)
+		{
+			playSound(0x6f)
+		}
+	}
+}
+
+//# address-hook(0x21a50c)
+function void AshuraIntro()
+{
+	player1.control_override = 0xff
+	player2.control_override = 0xff
+	control.player1 = 0
+	control.tails = 0
+	++objA0.animation.timer
+	if (objA0.value26 < 2)
+	{
+		if (s8(objA0.animation.timer) >= 6)
+		{
+			if (objA0.animation.frame == 0)
+			{
+				objA0.animation.timer = 0
+				++objA0.animation.sprite
+				if (objA0.animation.sprite > 5)
+				{
+					objA0.animation.frame = 1
+					objA0.animation.sprite = 5
+					if (objA0.value26 == 1)
+					{
+						objA0.value26 = 2
+					}
+				}
+			}
+			else
+			{
+				objA0.animation.timer = 0
+				--objA0.animation.sprite
+				if (objA0.animation.sprite <= 0)
+				{
+					objA0.animation.frame = 0
+					objA0.value26 = 1
+					objA0.animation.sprite = 0
+					objA0.animation.timer = 0
+				}
+			}
+		}
+	}
+	else
+	{
+		s8 timer = (objA0.animation.sprite == 6) ? 14 : (objA0.animation.sprite >= 9) ? 8 : 16
+		if (s8(objA0.animation.timer) >= timer)
+		{
+			objA0.animation.timer = 0
+			++objA0.animation.sprite
+			if (objA0.animation.sprite == 11)
+			{
+				player1.control_override = 0
+				player2.control_override = 0
+				control.player1 = 0
+				control.tails = 0
+			}
+		}
+	}
+	
+	A1 = 0xffffb000
+	objA0.position.x.u16 = objA1.position.x.u16
+	objA0.position.y.u16 = objA1.position.y.u16
+	objA1.render_flags &= ~render_flag.WORLD
+	DrawObject()
+	
+	if (player1.control_override == 0)
+	{
+		objA1.render_flags |= render_flag.WORLD
+		UnloadObject()
+		Game.endSkippableCutscene()
+		global.level_started = -0x6f	// Let HUD fly in
+		hud.dirty.timer = 0x80
+		timer.alldata = 0
+		hud.dirty.lives = 0x01
+		return
+	}
+}
+
+//# address-hook(0x01c4d0) end(0x01c54e)
+function void fn01c4d0()
+{
+	if (global.xtrachar != 168)
+	{
+		base.fn01c4d0()
+		return
+	}
+	move_area.left = 0x1308
+#if STANDALONE
+	// Show a bit more to the left, that looks better in widescreen
+	move_area.left = max(0x12e0, move_area.left - getScreenExtend())
+#endif
+
+	if (camera.position.x.u16 >= 0x1400)
+	{
+		// Switch to new checkpoint -- mainly for Sonic, so his intro gets skipped after death
+		checkpoint.number = 1
+		checkpoint.x = 0x13a0
+		checkpoint.y = 0x041a
+		Checkpoint.SaveCurrentState()
+		
+		checkpoint.camera.x = 0x1308
+		checkpoint.camera.y = 0x0390
+
+		checkpoint.time = 0
+		requestLoadingPatterns(0x08)		// Monitor sprites
+		camera.update_routine += 2
+	}
+}

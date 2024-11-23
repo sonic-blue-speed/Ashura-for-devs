@@ -1,0 +1,365 @@
+//Do not render hyper and super sonic's stars.
+//they overlap with the shields data, so sacrifices have to be made
+//honestly hyper sonic doesn't need them anyway!
+// address-hook(0x019348) end(0x019378)
+function void fn019348()
+{
+	if (char.character != CHARACTER_SONIC || ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168)))
+		base.fn019348()
+	return
+}
+
+// i'm not looking for the address hook of this function.
+// if this was a fault of the Extra Slot devs please correct this.
+
+function void fn0191a4()
+{
+	if (char.character != CHARACTER_SONIC || ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168)))
+		base.fn0191a4()
+	return
+}
+
+//# address-hook(0x0194ce) end(0x019524)
+function void InstaShield.Init()
+{
+	if (char.character != CHARACTER_SONIC || ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168)))
+	{
+		base.InstaShield.Init()
+		return
+	}
+	objA0.mapping_offset = 0x01a0d0
+	objA0.shield.pattern_offset = 0x01a154
+	objA0.shield.art_offset = 0x18c084
+	Shield.sharedInit()
+	
+	objA0.update_address = 0x2104c0
+}
+
+//# address-hook(0x2104c0)
+function void Ashura.ShieldUpdate()
+{
+	if ((u16[0xffffb000] + 0x2f) == 0)
+	{
+		return
+	}
+	
+	if (AshuraShieldNum == 1)
+	{
+		updateSpritePattern(0x18f8e4, 0xf760, 0x50)
+		objA0.mapping_offset = 0x019dc8
+		objA0.shield.art_offset = 0x18e8a4
+		objA0.shield.pattern_offset = 0x019efa
+		
+		LightningShield.AshuraUpdate()
+	}
+	else if (AshuraShieldNum == 2)
+	{
+		objA0.mapping_offset = 0x019f82
+		objA0.shield.art_offset = 0x18f984
+		objA0.shield.pattern_offset = 0x01a076
+		
+		A1 = 0xffffb000
+		UpdateMusicOnWaterTransition()
+		
+		BubbleShield.AshuraUpdate()
+	}
+	else if (AshuraShieldNum == 3)
+	{
+		objA0.mapping_offset = 0x019ac6
+		objA0.shield.art_offset = 0x18c704
+		objA0.shield.pattern_offset = 0x019ce6
+		
+		FireShield.AshuraUpdate()
+	}
+	else
+	{
+		return
+	}
+}
+
+//Knux wall-breaking
+//# address-hook(0x01fd08) end(0x01ff1a)
+function void fn01fd08()
+{
+	if (char.character != CHARACTER_SONIC || ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168)))
+	{
+		base.fn01fd08()
+		return
+	}
+	
+	u16[A0 + 0x30] = u16[0xffffb000 + 0x18]
+	u16[A0 + 0x36] = u16[0xffffb04a + 0x18]
+
+	D1 = objA0.box_size.x + 11
+	D2 = objA0.box_size.y
+	D3.u16 = D2.u16 + 1
+	D4.u16 = objA0.position.x.u16
+	fn01dc56()
+
+	D6 = (D6 << 16) + (D6 >> 16)
+	if (D6.u16 & 0x03)
+	{
+		bool canBreakWall = false
+
+		A1 = 0xffffb000
+		D1.u16 = u16[A0 + 0x30]
+		if (D6.u16 & 0x01)
+		{
+			if (u8[A1 + 0x38] == CHARACTER_KNUCKLES)
+			{
+				// Knuckles can break all walls
+				canBreakWall = true
+			}
+			else
+			{
+				if ((objA0.subtype2c & 0x80) == 0)	// Special Knuckles-only wall?
+				{
+					if (super.active)
+					{
+						// Super form breaks walls even when going slow
+						canBreakWall = true
+					}
+					else
+					{
+						// Normal Sonic and Tails need to quickly roll into a wall to break it (this includes the fire shield attack)
+						canBreakWall = (objA1.state == char.state.ROLLING && abs(D1.s16) >= 0x480)
+					}
+				}
+				else
+				{
+					{
+						canBreakWall = (objA1.state == char.state.ROLLING && abs(D1.s16) >= 0x0480)
+					}
+				}
+			}
+
+			if (canBreakWall)
+			{
+				objA0.flags2a &= ~object.flag.P1_PUSHING
+				Rocks.BreakWall()
+
+				if (objA0.flags2a & object.flag.P2_PUSHING)
+				{
+					// Check for second character
+					A1 = 0xffffb04a
+					if (u8[A1 + 0x38] == CHARACTER_KNUCKLES || objA1.state == char.state.ROLLING)
+					{
+						objA1.velocity.x = u16[A0 + 0x36]
+						u16[A1 + 0x1c] = objA1.velocity.x
+						objA0.flags2a &= ~object.flag.P2_PUSHING
+						objA1.flags2a &= ~char.flag.PUSHING
+					}
+				}
+			}
+		}
+
+		if (!canBreakWall)
+		{
+			// Give second character a try
+			A1 = 0xffffb04a
+			D1.u16 = u16[A0 + 0x36]
+
+			if (objA0.flags2a & object.flag.P2_PUSHING)
+			{
+				if (u8[A1 + 0x38] == CHARACTER_KNUCKLES)
+				{
+					// Knuckles can break all walls
+					canBreakWall = true
+				}
+				else
+				{
+					if ((objA0.subtype2c & 0x80) == 0)	// Special Knuckles-only wall?
+					{
+						// Normal Sonic and Tails need to quickly roll into a wall to break it (this includes the fire shield attack)
+						canBreakWall = (objA1.state == char.state.ROLLING && abs(D1.s16) >= 0x480)
+					}
+				}
+			}
+
+			if (canBreakWall)
+			{
+				objA0.flags2a &= ~object.flag.P2_PUSHING
+				Rocks.BreakWall()
+				return
+			}
+		}
+	}
+
+	if (competition_mode.active == 0)
+	{
+		if (checkForUnloadObjectAtPosition(objA0.countdown_value))
+			return
+	}
+	DrawObject()
+}
+
+//-------------------------------------------------------//
+// Fire shield                                           //
+//-------------------------------------------------------//
+
+
+function void FireShield.AshuraUpdate()
+{
+	A2 = 0xffffb000
+	if ((u8[A2 + 0x2b] & char.bonus.INVINCIBLE) || (u8[A2 + 0x20] == char.state.DISAPPEARED))
+		return
+
+	if (u8[A2 + 0x2a] & char.flag.UNDERWATER)
+	{
+		if (allocDynamicObjectStd())
+		{
+			// Spawn small explosion
+			objA1.update_address = 0x01e68e
+			objA1.position.x.u16 = objA0.position.x.u16
+			objA1.position.y.u16 = objA0.position.y.u16
+		}
+		
+		AshuraShieldNum = 0
+		return
+	}
+
+	objA0.position.x.u16 = u16[A2 + 0x10]
+	objA0.position.y.u16 = u16[A2 + 0x14]
+	objA0.flags2a = u8[A2 + 0x2a] & char.flag.FACING_LEFT
+	if (global.inv_gravity)
+		objA0.flags2a |= 0x02
+
+	if (objA0.state == 0)
+	{
+		objA0.sprite_attributes = (objA0.sprite_attributes & ~sprite_attribute.PRIORITY) | (u16[A2 + 0x0a] & sprite_attribute.PRIORITY)
+	}
+
+	Object.animationUpdate(0x019a02)
+	objA0.sprite_priority = (objA0.animation.sprite >= 0x0f) ? 0x200 : 0x80
+
+	Shield.SharedSpriteUpdate()
+	DrawObject()
+}
+
+//-------------------------------------------------------//
+// Lightning shield                                      //
+//-------------------------------------------------------//
+
+function void LightningShield.AshuraUpdate()
+{
+	A2 = 0xffffb000
+	if ((u8[A2 + 0x2b] & char.bonus.INVINCIBLE) || (u8[A2 + 0x20] == char.state.DISAPPEARED))
+		return
+
+	if (u8[A2 + 0x2a] & char.flag.UNDERWATER)
+	{
+		AshuraShieldNum = 0
+		return
+	}
+
+	objA0.position.x.u16 = u16[A2 + 0x10]
+	objA0.position.y.u16 = u16[A2 + 0x14]
+	objA0.flags2a = u8[A2 + 0x2a] & char.flag.FACING_LEFT
+	if (global.inv_gravity)
+		objA0.flags2a |= 0x02
+
+	objA0.sprite_attributes = (objA0.sprite_attributes & ~sprite_attribute.PRIORITY) | (u16[A2 + 0x0a] & sprite_attribute.PRIORITY)
+
+	if (objA0.state != 0)
+	{
+		LightningShield.CreateSparks()
+		objA0.state = 0
+	}
+
+	Object.animationUpdate(0x019a2a)
+	objA0.sprite_priority = (objA0.animation.sprite >= 0x0e) ? 0x200 : 0x80
+
+	Shield.SharedSpriteUpdate()
+	DrawObject()
+}
+
+//-------------------------------------------------------//
+// Bubble shield                                         //
+//-------------------------------------------------------//
+
+function void BubbleShield.AshuraUpdate()
+{
+	A2 = 0xffffb000
+	if ((u8[A2 + 0x2b] & char.bonus.INVINCIBLE) || (u8[A2 + 0x20] == char.state.DISAPPEARED))
+		return
+
+	objA0.position.x.u16 = u16[A2 + 0x10]
+	objA0.position.y.u16 = u16[A2 + 0x14]
+	objA0.flags2a = u8[A2 + 0x2a] & char.flag.FACING_LEFT
+	if (global.inv_gravity)
+		objA0.flags2a |= 0x02
+
+	objA0.sprite_attributes = (objA0.sprite_attributes & ~sprite_attribute.PRIORITY) | (u16[A2 + 0x0a] & sprite_attribute.PRIORITY)
+
+	Object.animationUpdate(0x019a7a)
+
+	Shield.SharedSpriteUpdate()
+	DrawObject()
+}
+
+function void SonicPressedJumpInMidAir()
+{
+	if ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168))
+		base.SonicPressedJumpInMidAir()
+	else
+		ExtraChar.pressedJumpInMidAir_char168()
+}
+
+function void Character.LandingOnGroundResetState()
+{
+	if (char.character != CHARACTER_SONIC || ((!competition_mode.active && global.xtrachar != 168) || (competition_mode.active && competition.xtrachar != 168)))
+	{
+		base.Character.LandingOnGroundResetState()
+		return // get out of here if your name's not Ashura
+	}
+	
+	Ashura.LandingOnGroundResetState() // your name's Ashura, welcome Ashura to your own function
+}
+
+function void Ashura.LandingOnGroundResetState()
+{
+	char.flags &= ~char.flag.IN_AIR
+	char.flags &= ~char.flag.PUSHING
+	char.flags &= ~char.flag.CONTROL_LOCK
+	char.jumping = 0
+	score.bonus_counter = 0 // No more increasing bonusses after hitting the ground
+	char.rotation.x = 0
+	u8[A0 + 0x2d] = 0
+	u8[A0 + 0x30] = 0
+	char.look_up_down_timer = 0
+	// Check for double jump state
+	if (char.double_jump_state != 0)
+	{
+		if (char.character == CHARACTER_SONIC && (char.bonus_effect & char.bonus.SHIELD_BUBBLE) && ShieldEffectActive ==1)
+		{
+			if (((char.bonus_effect & char.bonus.INVINCIBLE) == 0 || super.active ) && sonic.dropdash_counter == 0)
+			{
+				SonicLandingBubbleBounce()
+				ShieldEffectActive = 2 // set to 2 to stop hyper dash from happening after bouncing
+			}
+		}
+		
+		if (char.character == CHARACTER_SONIC && AshuraShieldNum == 2)
+		{
+			if (((char.bonus_effect & char.bonus.INVINCIBLE) == 0 || super.active ) && sonic.dropdash_counter == 0)
+			{
+				SonicLandingBubbleBounce()
+				ShieldEffectActive = 2 // set to 2 to stop hyper dash from happening after bouncing
+			}
+		}
+		
+		if (AshuraShieldNum != 3)
+		{
+			AshuraShieldNum = 0
+		}
+		
+		char.double_jump_state = 0
+	}
+	else
+	{
+		if (AshuraShieldNum != 3)
+		{
+			AshuraShieldNum = 0
+		}
+	}
+}

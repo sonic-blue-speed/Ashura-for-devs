@@ -1,0 +1,3 @@
+#if EXTRA_CHARACTERS_UNLIMITED
+include charscripts/?
+#endif
