@@ -1,0 +1,8 @@
+{
+	"01_ash": { "File": "aiz1ashura.ogg", "Type": "Music", "LoopStart": "000000"},
+	"0a_ash": { "File": "fbz2ashura.ogg", "Type": "Music", "LoopStart": "132216"},
+	"04_ash": { "File": "hcz2ashura.ogg", "Type": "Music", "LoopStart": "000000"},
+        "0b_ash": { "File": "icz1ashura.ogg", "Type": "Music", "LoopStart": "000000"},
+        "dc_ash": { "File": "dc_ash.ogg", "Type": "Music", "LoopStart": "000000"},
+        "1a_ash": { "File": "DDZ.ogg", "Type": "Music", "LoopStart": "000000"},
+ }
