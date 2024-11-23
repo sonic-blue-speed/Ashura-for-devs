@@ -1,0 +1,97 @@
+{
+	"Metadata":
+	{
+		"Name": "Extra slot 3D in 2D Ashura",
+		"Author": "Es Ashura Team, Sotaknuck, 3D2D Team.",
+        "Description": "After being summoned from the flickies to rescue them, he opened up the wrong portal thinking he will be back at the glitch universe but he made one to some type of past portal, Then after that he noticed Sonic, Tails, Knuckles, and their other friends. Sonic offered him if he wants to tag along to defeat Eggman and his robots. Ashura confused why sonic doesn't remember him, he yet agreed and then they go to face off Eggman!",
+		"URL": "https://gamebanana.com/wips/75105",
+		"ModVersion": "3.0",
+		"GameVersion": "22.04.26.0"
+	},
+	"Settings":
+    {
+		"Settings":
+    	[
+	    	{
+				"InternalName": "Ashurashoes.Palette",
+				"DisplayName": "Ashura Palettes",
+				"Variable": "Ashurashoes.palette",
+				"DefaultValue": "1",
+				"Category": "Customization",
+				"Options":
+	    		{
+					"0x00": "Sonic Styled Palette",
+					"0x01": "Blue Shoes (Default)",
+          			"0x02": "Godly Shoes",
+          			"0x03": "Fiuz11",
+         			"0x04": "Inverted",
+          			"0x05": "Monty",
+          			"0x06": "3D2D"
+	    		}
+	    	},
+			{
+				"InternalName": "Speed Shoes",
+				"DisplayName": "Ashura Unique SpeedShoes",
+				"Variable": "Ashurashoes",
+				"DefaultValue": "1",
+                "Category": "Speed Shoes",	
+				"Options":
+				{
+					"0": "No",
+					"1": "Yes"
+				}
+            },
+    		{
+				"InternalName": "Ashura firedash.palette",
+				"DisplayName": "Ashura Fire Dash Color",
+				"Variable": "AshuraDash",
+				"DefaultValue": "0",
+                "Category": "Customization",
+				"Options":
+				{
+					"0": "Red Fire",
+					"1": "Blue Fire",
+					"2": "Black Fire",
+					"3": "Green Fire"
+				}
+            },
+    		{
+    			"InternalName": "Signpost.sprite",
+				"DisplayName": "Ashura Signpost",
+				"Variable": "AshuraSign",
+				"DefaultValue": "0",	
+				"Category": "Customization",
+				"Options":
+		         {
+					"0": "Normal",
+					"1": "Alt"
+				}
+			},
+			{
+    			        "InternalName": "ashura sprites",
+				"DisplayName": "Ashura Sprites",
+				"Variable": "AshuraSprites",
+				"DefaultValue": "0",
+				"Category": "Customization",
+				"Options":
+		         {
+					"0": "Default",
+					"1": "Alt Ashura",
+					"2": "Sonic 2 Absolute"
+				}
+			}
+		]
+	},
+	
+	"OtherMods":
+	{
+		"extra-character-slots-unlimited":
+		{
+			"DisplayName": "Extra Character Slots",
+			"IsRequired": "1",
+			"Priority": "Lower"
+		}
+		
+	}
+
+}
