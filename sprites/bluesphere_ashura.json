@@ -1,0 +1,22 @@
+{
+	"bluesphere_slot168_0x01": { "File": "bluesphere_ashura.png", "Rect": "0,8,32,40", "Center": "16,35" },
+	"bluesphere_slot168_0x02": { "File": "bluesphere_ashura.png", "Rect": "32,4,32,48", "Center": "16,43" },
+	"bluesphere_slot168_0x03": { "File": "bluesphere_ashura.png", "Rect": "64,0,32,56", "Center": "16,43" },
+	"bluesphere_slot168_0x04": { "File": "bluesphere_ashura.png", "Rect": "96,0,32,56", "Center": "16,43" },
+	"bluesphere_slot168_0x05": { "File": "bluesphere_ashura.png", "Rect": "128,0,32,56", "Center": "18,43" },
+	"bluesphere_slot168_0x06": { "File": "bluesphere_ashura.png", "Rect": "160,0,32,56", "Center": "17,43" },
+	"bluesphere_slot168_0x07": { "File": "bluesphere_ashura.png", "Rect": "192,0,32,56", "Center": "17,43" },
+	"bluesphere_slot168_0x08": { "File": "bluesphere_ashura.png", "Rect": "224,0,32,56", "Center": "16,43" },
+	"bluesphere_slot168_0x09": { "File": "bluesphere_ashura.png", "Rect": "256,12,32,32", "Center": "16,38" },
+	"bluesphere_slot168_0x0a": { "File": "bluesphere_ashura.png", "Rect": "288,12,32,32", "Center": "16,38" },
+	"bluesphere_slot168_0x0b": { "File": "bluesphere_ashura.png", "Rect": "320,12,32,32", "Center": "16,38" },
+	//bumper
+	"bump_slot168_0x00":  { "File": "bumper.png", "Rect": "0,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x01":  { "File": "bumper.png", "Rect": "24,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x02":  { "File": "bumper.png", "Rect": "48,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x03":  { "File": "bumper.png", "Rect": "72,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x04":  { "File": "bumper.png", "Rect": "96,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x05":  { "File": "bumper.png", "Rect": "120,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x06":  { "File": "bumper.png", "Rect": "144,0,16,16", "Center": "8,8" },
+	"bump_slot168_0x07":  { "File": "bumper.png", "Rect": "168,0,16,16", "Center": "8,8" }
+}

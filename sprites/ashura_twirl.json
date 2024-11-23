@@ -1,0 +1,7 @@
+{
+	"ashura_springtwirl_0":  { "File": "ashura_twirl.bmp", "Rect": "1,0,24,49", "Center": "12,21" },
+	"ashura_springtwirl_1":  { "File": "ashura_twirl.bmp", "Rect": "28,0,29,49", "Center": "12,20" },
+	"ashura_springtwirl_2":  { "File": "ashura_twirl.bmp", "Rect": "58,0,30,44", "Center": "14,19" },
+	"ashura_springtwirl_3":  { "File": "ashura_twirl.bmp", "Rect": "89,0,26,50", "Center": "12,21" },
+	"ashura_springtwirl_4":  { "File": "ashura_twirl.bmp", "Rect": "119,0,33,50", "Center": "15,21" }
+}

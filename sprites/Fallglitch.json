@@ -1,0 +1,5 @@
+{
+	// Falling sprites
+	"Falling_Ashura":  { "File": "Falling_Ashuras.bmp", "Rect": "40,0,36,47", "Center": "17,22" },
+	"Falling_SuperAshura":  { "File": "Falling_Ashuras.bmp", "Rect": "0,0,36,50", "Center": "17,24" },
+}

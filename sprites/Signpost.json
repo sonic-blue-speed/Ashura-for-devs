@@ -1,0 +1,8 @@
+{ 
+ 	"signpost_slot168_1":  { "File": "signpost.bmp", "Rect": "0,0,48,32", "Center": "24,16" },
+	"signpost_slot168_2":  { "File": "signpost.bmp", "Rect": "49,0,48,32", "Center": "25,16" },
+	"Goal_animes_slot168_0":  { "File": "signpost.bmp", "Rect": "0,32,48,32", "Center": "24,16" },
+	"Goal_animes_slot168_1":  { "File": "signpost.bmp", "Rect": "0,64,48,32", "Center": "24,16" },
+	"Goal_animes_slot168_2":  { "File": "signpost.bmp", "Rect": "0,96,48,32", "Center": "24,16" },
+	"Goal_animes_slot168_3":  { "File": "signpost.bmp", "Rect": "0,128,48,32", "Center": "24,16" },
+}

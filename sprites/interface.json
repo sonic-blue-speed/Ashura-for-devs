@@ -1,0 +1,34 @@
+{
+	"dataSel_slot168":  { "File": "interface.png", "Rect": "37,1,32,40", "Center": "14,40" },
+	"hud_lives_icon_slot168":  { "File": "interface.png", "Rect": "1,58,54,16", "Center": "0,0" },
+	"dataSel_lifeContinue_slot168":  { "File": "interface.png", "Rect": "131,49,24,40", "Center": "16,-8" },
+	"dataSel_life_slot168":  { "File": "interface.png", "Rect": "131,49,24,16", "Center": "16,-8" },
+	"continue_icon_slot168":  { "File": "interface.png", "Rect": "70,67,14,23", "Center": "7,23" },
+	"monitor_icon_Ashura":  { "File": "interface.png", "Rect": "1,58,16,16", "Center": "8,8" },
+	"hud_bonus_icon_slot168":  { "File": "interface.png", "Rect": "76,43,12,19", "Center": "0,0" },
+	"result_nameplate_slot168":  { "File": "interface.png", "Rect": "0,111,96,16", "Center": "24,0" },
+	"dataSel_savePortrait_slot168":  { "File": "dataSelect.png", "Rect": "240,0,80,56", "Center": "40,120" },
+	"dataSel_savePortrait_superslot168":  { "File": "dataSelect.png", "Rect": "240,56,80,56", "Center": "40,120" },
+	"Clear_slot168":  { "File": "dataSelect.png", "Rect": "0,0,80,56", "Center": "40,120" },
+	"titlecard_bluebar":  { "File": "TitleCard_GreenBar.png", "Rect": "0,48,64,176", "Center": "0,0" },
+	
+	"ashurafire_blue_0x0b":  { "File": "bluedash.png", "Rect": "0,0,24,48", "Center": "0,24" },
+	"ashurafire_blue_0x0c":  { "File": "bluedash.png", "Rect": "24,0,48,48", "Center": "24,24" },
+	"ashurafire_blue_0x0d":  { "File": "bluedash.png", "Rect": "72,0,56,48", "Center": "28,24" },
+	"ashurafire_blue_0x0e":  { "File": "bluedash.png", "Rect": "128,0,64,48", "Center": "32,24" },
+	
+	"ashurafire_black_0x0b":  { "File": "blackdash.png", "Rect": "0,0,24,48", "Center": "0,24" },
+	"ashurafire_black_0x0c":  { "File": "blackdash.png", "Rect": "24,0,48,48", "Center": "24,24" },
+	"ashurafire_black_0x0d":  { "File": "blackdash.png", "Rect": "72,0,56,48", "Center": "28,24" },
+	"ashurafire_black_0x0e":  { "File": "blackdash.png", "Rect": "128,0,64,48", "Center": "32,24" },
+	
+	"ashurafire_green_0x0b":  { "File": "greendash.png", "Rect": "0,0,24,48", "Center": "0,24" },
+	"ashurafire_green_0x0c":  { "File": "greendash.png", "Rect": "24,0,48,48", "Center": "24,24" },
+	"ashurafire_green_0x0d":  { "File": "greendash.png", "Rect": "72,0,56,48", "Center": "28,24" },
+	"ashurafire_green_0x0e":  { "File": "greendash.png", "Rect": "128,0,64,48", "Center": "32,24" },
+	
+	"ashurabubble_0x0b":  { "File": "bubble.png", "Rect": "112,0,56,48", "Center": "28,24" },
+	"ashurabubble_0x0c":  { "File": "bubble.png", "Rect": "176,0,72,48", "Center": "36,24" },
+	
+	"ashura_electric":  { "File": "electric.png", "Rect": "0,0,48,48", "Center": "24,24" },
+}

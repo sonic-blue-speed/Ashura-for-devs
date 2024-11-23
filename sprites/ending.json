@@ -1,0 +1,14 @@
+{
+	"endpose_slot168_0x00":  { "File": "ending.png", "Rect": "194,258,45,70", "Center": "22,35" },
+	"endpose_slot168_0x01":  { "File": "ending.png", "Rect": "107,160,71,117", "Center": "35,58" },
+	"endpose_superashura":  { "File": "endpose_superashura.bmp", "Rect": "0,0,128,136", "Center": "64,68" },
+	"HurricaneRight":  { "File": "ending.png", "Rect": "0,0,116,64", "Center": "60,32" },
+	"HurricaneLeft":  { "File": "ending.png", "Rect": "121,0,120,64", "Center": "60,32" },
+	"HurricaneSmall1":  { "File": "ending.png", "Rect": "1,96,58,32", "Center": "32,16" },
+	"HurricaneSmall2":  { "File": "ending.png", "Rect": "65,97,58,30", "Center": "32,15" },
+	"HurricaneSmall3":  { "File": "ending.png", "Rect": "130,95,58,36", "Center": "32,22" },
+	"MicroAshura":  { "File": "ending.png", "Rect": "202,66,14,12", "Center": "8,4" },
+	"MiniAshura":  { "File": "icons.bmp", "Rect": "210,20,15,20", "Center": "9,15" },
+	"AshuraEndingSmallNPC":  { "File": "ending.png", "Rect": "45,134,32,15", "Center": "44,-2" },
+	"AshuraEndingNPC":  { "File": "ending.png", "Rect": "0,65,64,28", "Center": "52,20" }
+}

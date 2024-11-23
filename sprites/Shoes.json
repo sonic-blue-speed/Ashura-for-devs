@@ -1,0 +1,9 @@
+{
+	"monitor_Ashura_speedshoes":  { "File": "My_Shoes.png", "Rect": "0,16,16,16", "Center": "8,8" },
+	"monitor_Ashura_Rspeedshoes":  { "File": "My_Shoes2.png", "Rect": "16,16,16,16", "Center": "8,8" },
+	"monitor_AshuraFiuz11_speedshoes":  { "File": "My_Shoes.png", "Rect": "16,0,16,16", "Center": "8,8" },
+	"monitor_AshuraY_speedshoes":  { "File": "My_Shoes.png", "Rect": "16,16,16,16", "Center": "8,8" },
+	"monitor_AshuraINVERTED_speedshoes":  { "File": "My_Shoes2.png", "Rect": "16,0,16,16", "Center": "8,8" },
+	"monitor_AshuraSonicStyled_speedshoes":  { "File": "My_Shoes2.png", "Rect": "0,0,16,16", "Center": "8,8" },
+	"monitor_AshuraBNP_speedshoes":  { "File": "My_Shoes2.png", "Rect": "0,16,16,16", "Center": "8,8" }
+}

@@ -1,0 +1,15 @@
+{
+	"ESS_Char_Es168":  { "File": "dataSel_ashura.png", "Rect": "0,0,32,39", "Center": "7,40" },
+	"dataSel_ashuradefault":  { "File": "dataSel_ashura.png", "Rect": "0,0,32,39", "Center": "18,40" },
+	"dataSel_sonicstyled":  { "File": "dataSel_ashura.png", "Rect": "32,0,32,39", "Center": "18,40" },
+	"dataSel_GODLYSHOES":  { "File": "dataSel_ashura.png", "Rect": "64,0,32,39", "Center": "18,40" },
+	"dataSel_FIUZ11":  { "File": "dataSel_ashura.png", "Rect": "96,0,32,39", "Center": "18,40" },
+	"dataSel_INVERTED":  { "File": "dataSel_ashura.png", "Rect": "128,0,32,39", "Center": "18,40" },
+	"dataSel_PIKMONTY":  { "File": "dataSel_ashura.png", "Rect": "160,0,32,39", "Center": "18,40" },
+	"dataSel_B&PS":  { "File": "dataSel_ashura.png", "Rect": "192,0,32,39", "Center": "18,40" },
+	"ESS_Life_Es168":  { "File": "ashura_life.png", "Rect": "0,0,16,16", "Center": "8,16" },
+	"ESS_Cont_Es168":  { "File": "ashura_continue.png", "Rect": "0,0,0,1", "Center": "10,24" },
+	"ESS_Zone_Es168_0":  { "File": "dataSelect.png", "Rect": "240,0,80,56", "Center": "40,28" },
+	"ESS_Zone_Es168_1":  { "File": "dataSelect.png", "Rect": "240,56,80,56", "Center": "40,28" },
+	"ESS_Zone_Es168_2":  { "File": "dataSelect.png", "Rect": "0,0,80,56", "Center": "40,28" }
+}

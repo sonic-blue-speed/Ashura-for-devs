@@ -1,0 +1,30 @@
+{
+	"168intro_0":  { "File": "ashuralook.bmp", "Rect": "32,0,32,40", "Center": "16,19" },
+	"168intro_1":  { "File": "ashuralook.bmp", "Rect": "32,0,32,40", "Center": "16,19" },
+	"168intro_2":  { "File": "ashuralook.bmp", "Rect": "65,0,32,40", "Center": "16,19" },
+	"168intro_3":  { "File": "ashuralook.bmp", "Rect": "98,0,32,40", "Center": "16,19" },
+	"168intro_4":  { "File": "ashuralook.bmp", "Rect": "131,0,32,40", "Center": "16,19" },
+	"168intro_5":  { "File": "ashuralook.bmp", "Rect": "164,0,32,40", "Center": "16,19" },
+	
+	"168intro_6":  { "File": "ashurago.bmp", "Rect": "0,0,23,39", "Center": "12,19" },
+	"168intro_7":  { "File": "ashurago.bmp", "Rect": "24,4,27,35", "Center": "14,15" },
+	"168intro_8":  { "File": "ashurago.bmp", "Rect": "52,5,27,34", "Center": "14,14" },
+	"168intro_9":  { "File": "ashurago.bmp", "Rect": "80,4,27,36", "Center": "14,15" },
+	"168intro_10":  { "File": "ashurago.bmp", "Rect": "108,0,23,39", "Center": "12,19" },
+	
+	"168intro_0_2":  { "File": "sonic2look.bmp", "Rect": "0,0,32,40", "Center": "16,19" },
+	"168intro_1_2":  { "File": "sonic2look.bmp", "Rect": "33,0,32,40", "Center": "16,19" },
+	"168intro_2_2":  { "File": "sonic2look.bmp", "Rect": "66,0,32,40", "Center": "16,19" },
+	"168intro_3_2":  { "File": "sonic2look.bmp", "Rect": "99,0,32,40", "Center": "16,19" },
+	"168intro_4_2":  { "File": "sonic2look.bmp", "Rect": "99,0,32,40", "Center": "16,19" },
+	"168intro_5_2":  { "File": "sonic2look.bmp", "Rect": "132,0,32,40", "Center": "16,19" },
+	
+	"168intro_6_2":  { "File": "sonic2intro.bmp", "Rect": "0,0,23,39", "Center": "12,19" },
+	"168intro_7_2":  { "File": "sonic2intro.bmp", "Rect": "24,4,27,35", "Center": "14,15" },
+	"168intro_8_2":  { "File": "sonic2intro.bmp", "Rect": "52,5,27,34", "Center": "14,14" },
+	"168intro_9_2":  { "File": "sonic2intro.bmp", "Rect": "80,4,27,36", "Center": "14,15" },
+	"168intro_10_2":  { "File": "sonic2intro.bmp", "Rect": "108,0,23,39", "Center": "12,19" },
+	
+	"168atonblast":  { "File": "circle.png", "Rect": "0,0,512,512", "Center": "256,256" },
+	"flash":  { "File": "flash.png"},
+}
